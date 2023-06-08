@@ -1,12 +1,11 @@
+import { Country } from "../../types/types";
+
 interface Props {
-  name: string;
-  region: string;
-  capital: string;
-  languages: string[];
+  country: Country;
 }
 
-export default function CountryListItem(props: Props) {
-  const { name, region, capital, languages } = props;
+export default function CountryListItem({ country }: Props) {
+  const { name, region, capital, languages } = country;
 
   const renderLanguages = () => {
     return languages.join(", ");
