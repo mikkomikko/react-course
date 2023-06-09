@@ -1,38 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CountryListItem from "../CountryListItem/CountryListItem";
 import TextInput from "../TextInput/TextInput";
 import { Country } from "../../types/types";
+import axios from "axios";
 
 export default function CountryList() {
   const [filterValue, setFilterValue] = useState("");
+  const [countries, setCountries] = useState<Country[]>([]);
+
+  useEffect(() => {
+    console.log("effect");
+    axios
+      .get(
+        "https://restcountries.com/v3.1/all?fields=cca3,name,flags,capital,currencies,region,languages,capitalInfo,landlocked"
+      )
+      .then((response) => {
+        console.log("promise fulfilled");
+        setCountries(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+  console.log("render", countries.length, "countries");
 
   const handleFilterChange = (value: string) => {
     setFilterValue(value);
   };
-
-  const countries: Country[] = [
-    {
-      cca3: "fin",
-      name: "Finland",
-      capital: "Helsinki",
-      region: "Europe",
-      languages: ["Finnish", "Swedish"],
-    },
-    {
-      cca3: "swe",
-      name: "Sweden",
-      capital: "Stockholm",
-      region: "Europe",
-      languages: ["Swedish"],
-    },
-    {
-      cca3: "nor",
-      name: "Norway",
-      capital: "Helsinki",
-      region: "Oslo",
-      languages: ["Nynorsk", "Bokmål"],
-    },
-  ];
 
   return (
     <div>
