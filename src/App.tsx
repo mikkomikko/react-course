@@ -1,10 +1,13 @@
-import CountryList from "./components/CountryList/CountryList";
+import { Routes, Route } from "react-router-dom";
+import CountryListPage from "./pages/CountryListPage/CountryListPage";
+import AboutPage from "./pages/AboutPage/AboutPage";
 
 function App() {
   return (
-    <div className="max-w-7xl mx-auto">
-      <CountryList />
-    </div>
+    <Routes>
+      <Route path="/" element={<CountryListPage />} />
+      <Route path="about" element={<AboutPage />} />
+    </Routes>
   );
 }
 
