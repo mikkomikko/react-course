@@ -50,11 +50,13 @@ export default function CountryList() {
 
   return (
     <div>
-      <TextInput onChange={handleFilterChange} />
-      <Checkbox
-        label="Show only land locked"
-        onChange={(value) => setShouldFilterLandlocked(value)}
-      />
+      <div className="p-4">
+        <TextInput onChange={handleFilterChange} />
+        <Checkbox
+          label="Show only land locked"
+          onChange={(value) => setShouldFilterLandlocked(value)}
+        />
+      </div>
       <ul className="p-4 grid grid-cols-4 gap-4 text-sm leading-6">
         {filteredCountries.map((country) => {
           return <CountryListItem key={country.cca3} country={country} />;
