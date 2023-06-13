@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useCountryDetailsData } from "../../hooks/useCountryDetailsData";
+import CurrentWeather from "../../components/CurrentWeather/CurrentWeather";
 
 export default function CountryDetailsPage() {
   const { cca3 } = useParams();
@@ -16,8 +17,9 @@ export default function CountryDetailsPage() {
       </div>
       {countryData && (
         <>
-          <h1 className="text-6xl font-semibold">{countryData?.name.common}</h1>
-          <img src={countryData?.flags.svg} alt={countryData?.flags.alt} />
+          <h1 className="text-6xl font-semibold">{countryData.name.common}</h1>
+          <img src={countryData.flags.svg} alt={countryData.flags.alt} />
+          <CurrentWeather country={countryData} />
         </>
       )}
     </div>
