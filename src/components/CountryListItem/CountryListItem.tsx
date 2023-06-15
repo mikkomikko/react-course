@@ -9,7 +9,11 @@ interface Props {
 
 export default function CountryListItem({ country }: Props) {
   const { name, region, capital, languages, cca3, flags } = country;
-  const { addCountry } = useContext(BucketListContext);
+  const { addCountry, removeCountry, selectedCountries } =
+    useContext(BucketListContext);
+  const isInBucketList = selectedCountries.find(
+    (country) => country.cca3 === cca3
+  );
 
   const renderLanguages = () => {
     return Object.values(languages).join(", ");
@@ -17,6 +21,10 @@ export default function CountryListItem({ country }: Props) {
 
   const handleAddToBucketList = () => {
     addCountry(country);
+  };
+
+  const handleRemoveFromBucketList = () => {
+    removeCountry(cca3);
   };
 
   return (
@@ -34,12 +42,22 @@ export default function CountryListItem({ country }: Props) {
       >
         Details
       </Link>
-      <button
-        onClick={handleAddToBucketList}
-        className="mt-3 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
-      >
-        Add to list
-      </button>
+      {!isInBucketList && (
+        <button
+          onClick={handleAddToBucketList}
+          className="mt-3 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+        >
+          Add to list
+        </button>
+      )}
+      {isInBucketList && (
+        <button
+          onClick={handleRemoveFromBucketList}
+          className="mt-3 px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+        >
+          Remove from list
+        </button>
+      )}
     </li>
   );
 }
