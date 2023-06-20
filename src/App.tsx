@@ -3,6 +3,7 @@ import CountryListPage from "./pages/CountryListPage/CountryListPage";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import Layout from "./pages/Layout";
 import CountryDetailsPage from "./pages/CountryDetailsPage/CountryDetailsPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route index element={<CountryListPage />} />
         <Route path="country/:cca3" element={<CountryDetailsPage />} />
         <Route path="about" element={<AboutPage />} />
+        <Route path="login" element={<LoginPage />} />
       </Route>
     </Routes>
   );
