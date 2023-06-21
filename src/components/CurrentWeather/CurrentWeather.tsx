@@ -18,7 +18,9 @@ export default function CurrentWeather({ country }: Props) {
           {weatherData.current_weather.temperature} °C
         </div>
       )}
-      <div className="text-slate-500">{country.capital}</div>
+      <div className="text-slate-500" data-testid="capital">
+        {country.capital}
+      </div>
     </div>
   );
 }

@@ -23,7 +23,7 @@ export default function CountryList() {
     }
 
     if (!filterValue.trim()) {
-      return result;
+      return result.sort((a, b) => a.name.common.localeCompare(b.name.common));
     }
 
     return result
