@@ -32,4 +32,5 @@ export const mockCountry: Country = {
     eng: "English",
   },
   landlocked: false,
+  population: 1000000,
 };
