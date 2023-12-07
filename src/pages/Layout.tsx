@@ -20,6 +20,18 @@ export default function Layout() {
             </li>
             <li>
               <NavLink
+                to="/most-populous"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-gray-800 dark:text-gray-200 border-b-2 border-blue-500 mx-1.5 sm:mx-6"
+                    : "text-gray-800 dark:text-gray-200 border-b-2 mx-1.5 sm:mx-6"
+                }
+              >
+                Countries by population
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/about"
                 className={({ isActive }) =>
                   isActive
