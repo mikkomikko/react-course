@@ -30,6 +30,7 @@ export type Country = {
     [key: string]: string;
   };
   landlocked: boolean;
+  population: number;
 };
 
 type CurrentWeather = {

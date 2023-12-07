@@ -3,23 +3,21 @@ import CountryListItem from "../CountryListItem/CountryListItem";
 import TextInput from "../TextInput/TextInput";
 import { Country } from "../../types/types";
 import { Checkbox } from "../Checkbox/Checkbox";
-import { useCountryData } from "../../hooks/useCountryData";
+import { useCountryListData } from "../../hooks/useCountryListData";
 
 export default function CountryList() {
   const [filterValue, setFilterValue] = useState("");
   const [shouldFilterLandlocked, setShouldFilterLandlocked] = useState(false);
-  const { isLoading, countryData } = useCountryData(
-    "https://restcountries.com/v3.1/all?fields=cca3,name,flags,capital,currencies,region,languages,capitalInfo,landlocked"
-  );
+  const { isLoading, countries } = useCountryListData();
 
   const filteredCountries = useMemo(() => {
-    if (!countryData.length) {
+    if (!countries.length) {
       return [];
     }
 
-    let result: Country[] = countryData;
+    let result: Country[] = countries;
     if (shouldFilterLandlocked) {
-      result = countryData.filter((country) => country.landlocked);
+      result = countries.filter((country) => country.landlocked);
     }
 
     if (!filterValue.trim()) {
@@ -31,7 +29,7 @@ export default function CountryList() {
         country.name.common.toLowerCase().includes(filterValue.toLowerCase())
       )
       .sort((a, b) => a.name.common.localeCompare(b.name.common));
-  }, [countryData, filterValue, shouldFilterLandlocked]);
+  }, [countries, filterValue, shouldFilterLandlocked]);
 
   const handleFilterChange = (value: string) => {
     setFilterValue(value);
